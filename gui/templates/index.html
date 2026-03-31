@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreeAPI Pool - 免费API流量池管理</title>
+    <title>FreeAPI Pool - Piscină API gratuită</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <div id="app">
-        <!-- 侧边栏遮罩 -->
+        <!-- Ștergător sidebar -->
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-        <!-- 侧边栏 -->
+        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="logo-text">
                         <span class="logo-title">FreeAPI Pool</span>
-                        <span class="logo-subtitle">免费API流量池</span>
+                        <span class="logo-subtitle">Piscină API gratuită</span>
                     </div>
                 </div>
             </div>
@@ -39,61 +39,61 @@
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item active" data-page="dashboard" onclick="switchPage('dashboard')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-                    <span>控制面板</span>
+                    <span>Panou de control</span>
                 </a>
                 <a href="#" class="nav-item" data-page="providers" onclick="switchPage('providers')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                    <span>提供商管理</span>
+                    <span>Gestionare furnizori</span>
                 </a>
                 <a href="#" class="nav-item" data-page="models" onclick="switchPage('models')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                    <span>模型列表</span>
+                    <span>Listă modele</span>
                 </a>
                 <a href="#" class="nav-item" data-page="playground" onclick="switchPage('playground')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    <span>对话测试</span>
+                    <span>Testare conversație</span>
                 </a>
                 <a href="#" class="nav-item" data-page="apikeys" onclick="switchPage('apikeys')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-                    <span>API密钥</span>
+                    <span>Chei API</span>
                 </a>
                 <a href="#" class="nav-item" data-page="docs" onclick="switchPage('docs')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    <span>接口文档</span>
+                    <span>Documentație API</span>
                 </a>
             </nav>
 
             <div class="sidebar-footer">
                 <div class="server-status">
                     <div class="status-dot online"></div>
-                    <span>服务运行中</span>
+                    <span>Serviciu activ</span>
                 </div>
                 <span class="version">v1.0.0</span>
             </div>
         </aside>
 
-        <!-- 主内容区 -->
+        <!-- Conținut principal -->
         <main class="main-content">
-            <!-- 顶部栏 -->
+            <!-- Bara superioară -->
             <header class="topbar">
                 <button class="menu-toggle" onclick="toggleSidebar()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
-                <div class="topbar-title" id="pageTitle">控制面板</div>
+                <div class="topbar-title" id="pageTitle">Panou de control</div>
                 <div class="topbar-actions">
                     <div class="api-endpoint">
                         <code>http://localhost:8080/v1</code>
-                        <button class="btn-icon" onclick="copyEndpoint()" title="复制API地址">
+                        <button class="btn-icon" onclick="copyEndpoint()" title="Copiază adresa API">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                         </button>
                     </div>
                 </div>
             </header>
 
-            <!-- 页面内容 -->
+            <!-- Conținut pagină -->
             <div class="page-content">
 
-                <!-- ======== 控制面板页面 ======== -->
+                <!-- ======== Pagina panou de control ======== -->
                 <div class="page active" id="page-dashboard">
                     <div class="stats-grid">
                         <div class="stat-card">
@@ -102,7 +102,7 @@
                             </div>
                             <div class="stat-info">
                                 <span class="stat-value" id="stat-requests">0</span>
-                                <span class="stat-label">总请求数</span>
+                                <span class="stat-label">Total cereri</span>
                             </div>
                         </div>
                         <div class="stat-card">
@@ -111,7 +111,7 @@
                             </div>
                             <div class="stat-info">
                                 <span class="stat-value" id="stat-success">0%</span>
-                                <span class="stat-label">成功率</span>
+                                <span class="stat-label">Rata de succes</span>
                             </div>
                         </div>
                         <div class="stat-card">
@@ -120,7 +120,7 @@
                             </div>
                             <div class="stat-info">
                                 <span class="stat-value" id="stat-models">0</span>
-                                <span class="stat-label">可用模型</span>
+                                <span class="stat-label">Modele disponibile</span>
                             </div>
                         </div>
                         <div class="stat-card">
@@ -129,46 +129,46 @@
                             </div>
                             <div class="stat-info">
                                 <span class="stat-value" id="stat-providers">0/0</span>
-                                <span class="stat-label">活跃提供商</span>
+                                <span class="stat-label">Furnizori activi</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 提供商状态概览 -->
+                    <!-- Prezentare generală furnizori -->
                     <div class="card">
                         <div class="card-header">
-                            <h3>提供商状态概览</h3>
+                            <h3>Prezentare generală furnizori</h3>
                             <button class="btn btn-sm" onclick="refreshDashboard()">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-                                刷新
+                                Reîmprospătează
                             </button>
                         </div>
                         <div class="provider-overview" id="providerOverview">
-                            <div class="loading">加载中...</div>
+                            <div class="loading">Se încarcă...</div>
                         </div>
                     </div>
 
-                    <!-- 快速开始 -->
+                    <!-- Start rapid -->
                     <div class="card">
                         <div class="card-header">
-                            <h3>快速开始</h3>
+                            <h3>Start rapid</h3>
                         </div>
                         <div class="quickstart">
                             <div class="code-block">
                                 <div class="code-header">
                                     <span>Python (OpenAI SDK)</span>
-                                    <button class="btn-icon" onclick="copyCode('code-python')">复制</button>
+                                    <button class="btn-icon" onclick="copyCode('code-python')">Copiază</button>
                                 </div>
                                 <pre id="code-python"><code>from openai import OpenAI
 
 client = OpenAI(
     base_url="http://localhost:8080/v1",
-    api_key="free"  # 任意字符串即可
+    api_key="free"  # orice șir de caractere
 )
 
 response = client.chat.completions.create(
     model="gpt-4o-mini",
-    messages=[{"role": "user", "content": "你好！"}],
+    messages=[{"role": "user", "content": "Salut!"}],
     stream=True,
 )
 
@@ -179,13 +179,13 @@ for chunk in response:
                             <div class="code-block">
                                 <div class="code-header">
                                     <span>cURL</span>
-                                    <button class="btn-icon" onclick="copyCode('code-curl')">复制</button>
+                                    <button class="btn-icon" onclick="copyCode('code-curl')">Copiază</button>
                                 </div>
                                 <pre id="code-curl"><code>curl http://localhost:8080/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "gpt-4o-mini",
-    "messages": [{"role": "user", "content": "你好！"}],
+    "messages": [{"role": "user", "content": "Salut!"}],
     "stream": false
   }'</code></pre>
                             </div>
@@ -193,15 +193,15 @@ for chunk in response:
                     </div>
                 </div>
 
-                <!-- ======== 提供商管理页面 ======== -->
+                <!-- ======== Pagina gestionare furnizori ======== -->
                 <div class="page" id="page-providers">
                     <div class="card">
                         <div class="card-header">
-                            <h3>提供商管理</h3>
+                            <h3>Gestionare furnizori</h3>
                             <div class="header-actions">
                                 <button class="btn btn-sm btn-primary" onclick="checkAllHealth()">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                                    全部检测
+                                    Verifică toți
                                 </button>
                             </div>
                         </div>
@@ -209,68 +209,68 @@ for chunk in response:
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>提供商</th>
-                                        <th>状态</th>
-                                        <th>模型数</th>
-                                        <th>请求数</th>
-                                        <th>成功率</th>
-                                        <th>平均延迟</th>
-                                        <th>需要认证</th>
-                                        <th>操作</th>
+                                        <th>Furnizor</th>
+                                        <th>Stare</th>
+                                        <th>Număr modele</th>
+                                        <th>Cereri</th>
+                                        <th>Rata de succes</th>
+                                        <th>Latență medie</th>
+                                        <th>Necesită autentificare</th>
+                                        <th>Acțiuni</th>
                                     </tr>
                                 </thead>
                                 <tbody id="providersTableBody">
-                                    <tr><td colspan="8" class="loading">加载中...</td></tr>
+                                    <tr><td colspan="8" class="loading">Se încarcă...</td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- ======== 模型列表页面 ======== -->
+                <!-- ======== Pagina listă modele ======== -->
                 <div class="page" id="page-models">
                     <div class="model-filters">
-                        <button class="filter-btn active" onclick="filterModels('all')">全部</button>
-                        <button class="filter-btn" onclick="filterModels('chat')">对话</button>
-                        <button class="filter-btn" onclick="filterModels('reasoning')">推理</button>
-                        <button class="filter-btn" onclick="filterModels('code')">代码</button>
-                        <button class="filter-btn" onclick="filterModels('vision')">视觉</button>
-                        <button class="filter-btn" onclick="filterModels('image')">图像生成</button>
-                        <button class="filter-btn" onclick="filterModels('audio')">音频</button>
+                        <button class="filter-btn active" onclick="filterModels('all')">Toate</button>
+                        <button class="filter-btn" onclick="filterModels('chat')">Conversație</button>
+                        <button class="filter-btn" onclick="filterModels('reasoning')">Raționament</button>
+                        <button class="filter-btn" onclick="filterModels('code')">Cod</button>
+                        <button class="filter-btn" onclick="filterModels('vision')">Vizual</button>
+                        <button class="filter-btn" onclick="filterModels('image')">Generare imagini</button>
+                        <button class="filter-btn" onclick="filterModels('audio')">Audio</button>
                     </div>
                     <div class="models-grid" id="modelsGrid">
-                        <div class="loading">加载中...</div>
+                        <div class="loading">Se încarcă...</div>
                     </div>
                 </div>
 
-                <!-- ======== 对话测试页面 ======== -->
+                <!-- ======== Pagina testare conversație ======== -->
                 <div class="page" id="page-playground">
                     <div class="playground-layout">
                         <div class="playground-sidebar">
                             <div class="form-group">
-                                <label>模型</label>
+                                <label>Model</label>
                                 <select id="playgroundModel" class="form-select">
                                     <option value="gpt-4o-mini">GPT-4o Mini</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>提供商（可选）</label>
+                                <label>Furnizor (opțional)</label>
                                 <select id="playgroundProvider" class="form-select">
-                                    <option value="">自动选择</option>
+                                    <option value="">Selectare automată</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>温度: <span id="tempValue">0.7</span></label>
+                                <label>Temperatură: <span id="tempValue">0.7</span></label>
                                 <input type="range" id="playgroundTemp" min="0" max="2" step="0.1" value="0.7" oninput="document.getElementById('tempValue').textContent=this.value">
                             </div>
                             <div class="form-group">
-                                <label>流式输出</label>
+                                <label>Ieșire în flux</label>
                                 <label class="toggle">
                                     <input type="checkbox" id="playgroundStream" checked>
                                     <span class="toggle-slider"></span>
                                 </label>
                             </div>
-                            <button class="btn btn-danger btn-block" onclick="clearChat()">清空对话</button>
+                            <button class="btn btn-danger btn-block" onclick="clearChat()">Șterge conversația</button>
                         </div>
                         <div class="playground-main">
                             <div class="chat-messages" id="chatMessages">
@@ -278,12 +278,12 @@ for chunk in response:
                                     <div class="welcome-icon">
                                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                                     </div>
-                                    <h3>对话测试</h3>
-                                    <p>选择模型并开始对话，测试API流量池的响应效果</p>
+                                    <h3>Testare conversație</h3>
+                                    <p>Selectează un model și începe o conversație pentru a testa răspunsurile piscinei API</p>
                                 </div>
                             </div>
                             <div class="chat-input-area">
-                                <textarea id="chatInput" placeholder="输入消息..." rows="1" onkeydown="handleChatKeydown(event)"></textarea>
+                                <textarea id="chatInput" placeholder="Scrie un mesaj..." rows="1" onkeydown="handleChatKeydown(event)"></textarea>
                                 <button class="btn btn-primary send-btn" id="sendBtn" onclick="sendMessage()">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                                 </button>
@@ -292,38 +292,38 @@ for chunk in response:
                     </div>
                 </div>
 
-                <!-- ======== API密钥页面 ======== -->
+                <!-- ======== Pagina chei API ======== -->
                 <div class="page" id="page-apikeys">
                     <div class="card">
                         <div class="card-header">
-                            <h3>API 密钥管理</h3>
+                            <h3>Gestionare chei API</h3>
                             <button class="btn btn-sm btn-primary" onclick="generateApiKey()">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                                生成新密钥
+                                Generează cheie nouă
                             </button>
                         </div>
                         <div class="api-keys-info">
                             <div class="info-banner">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                                <p>当前为开放模式，所有请求均可访问。如需限制访问，可生成API密钥并开启认证模式。密钥格式兼容 OpenAI API Key 规范。</p>
+                                <p>Modul curent este deschis, toate cererile sunt permise. Pentru a restricționa accesul, poți genera chei API și activa modul de autentificare. Formatul cheilor este compatibil cu OpenAI API Key.</p>
                             </div>
                         </div>
                         <div class="table-wrapper">
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>密钥名称</th>
-                                        <th>密钥</th>
-                                        <th>创建时间</th>
-                                        <th>使用次数</th>
-                                        <th>状态</th>
-                                        <th>操作</th>
+                                        <th>Nume cheie</th>
+                                        <th>Cheie</th>
+                                        <th>Creată la</th>
+                                        <th>Utilizări</th>
+                                        <th>Stare</th>
+                                        <th>Acțiuni</th>
                                     </tr>
                                 </thead>
                                 <tbody id="apiKeysTableBody">
                                     <tr>
                                         <td colspan="6" class="empty-state">
-                                            <p>暂无API密钥。当前为开放访问模式。</p>
+                                            <p>Nicio cheie API. Modul curent este acces deschis.</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -332,25 +332,25 @@ for chunk in response:
                     </div>
                 </div>
 
-                <!-- ======== 接口文档页面 ======== -->
+                <!-- ======== Pagina documentație API ======== -->
                 <div class="page" id="page-docs">
                     <div class="card">
-                        <div class="card-header"><h3>API 接口文档</h3></div>
+                        <div class="card-header"><h3>Documentație API</h3></div>
                         <div class="docs-content">
-                            <h4>基础信息</h4>
+                            <h4>Informații de bază</h4>
                             <table class="info-table">
-                                <tr><td class="label">Base URL</td><td><code>http://localhost:8080/v1</code></td></tr>
-                                <tr><td class="label">协议格式</td><td>兼容 OpenAI API 格式</td></tr>
-                                <tr><td class="label">认证方式</td><td>Bearer Token（当前开放模式，任意字符串即可）</td></tr>
+                                <tr><td class="label">URL de bază</td><td><code>http://localhost:8080/v1</code></td></tr>
+                                <tr><td class="label">Format protocol</td><td>Compatibil cu OpenAI API</td></tr>
+                                <tr><td class="label">Metodă autentificare</td><td>Bearer Token (mod deschis, orice șir de caractere)</td></tr>
                             </table>
 
-                            <h4>端点列表</h4>
+                            <h4>Listă endpoint-uri</h4>
 
                             <div class="endpoint">
                                 <div class="endpoint-header">
                                     <span class="method get">GET</span>
                                     <code>/v1/models</code>
-                                    <span class="endpoint-desc">获取可用模型列表</span>
+                                    <span class="endpoint-desc">Obține lista modelelor disponibile</span>
                                 </div>
                             </div>
 
@@ -358,17 +358,17 @@ for chunk in response:
                                 <div class="endpoint-header">
                                     <span class="method post">POST</span>
                                     <code>/v1/chat/completions</code>
-                                    <span class="endpoint-desc">对话补全（支持流式）</span>
+                                    <span class="endpoint-desc">Completare conversație (suportă flux)</span>
                                 </div>
                                 <div class="endpoint-body">
-                                    <h5>请求参数</h5>
+                                    <h5>Parametri cerere</h5>
                                     <table class="params-table">
-                                        <tr><td><code>model</code></td><td>string</td><td>必填</td><td>模型名称，如 "gpt-4o-mini"</td></tr>
-                                        <tr><td><code>messages</code></td><td>array</td><td>必填</td><td>消息列表 [{role, content}]</td></tr>
-                                        <tr><td><code>stream</code></td><td>boolean</td><td>可选</td><td>是否流式输出，默认 false</td></tr>
-                                        <tr><td><code>temperature</code></td><td>float</td><td>可选</td><td>温度参数，0-2，默认 0.7</td></tr>
-                                        <tr><td><code>max_tokens</code></td><td>integer</td><td>可选</td><td>最大输出token数，默认 4096</td></tr>
-                                        <tr><td><code>provider</code></td><td>string</td><td>可选</td><td>指定提供商名称（扩展字段）</td></tr>
+                                        <tr><td><code>model</code></td><td>string</td><td>obligatoriu</td><td>Nume model, ex. "gpt-4o-mini"</td></tr>
+                                        <tr><td><code>messages</code></td><td>array</td><td>obligatoriu</td><td>Listă mesaje [{role, content}]</td></tr>
+                                        <tr><td><code>stream</code></td><td>boolean</td><td>opțional</td><td>Ieșire în flux, implicit false</td></tr>
+                                        <tr><td><code>temperature</code></td><td>float</td><td>opțional</td><td>Parametru temperatură, 0-2, implicit 0.7</td></tr>
+                                        <tr><td><code>max_tokens</code></td><td>integer</td><td>opțional</td><td>Număr maxim token-uri ieșire, implicit 4096</td></tr>
+                                        <tr><td><code>provider</code></td><td>string</td><td>opțional</td><td>Specifică furnizorul (câmp extins)</td></tr>
                                     </table>
                                 </div>
                             </div>
@@ -377,7 +377,7 @@ for chunk in response:
                                 <div class="endpoint-header">
                                     <span class="method get">GET</span>
                                     <code>/api/providers</code>
-                                    <span class="endpoint-desc">获取所有提供商状态</span>
+                                    <span class="endpoint-desc">Obține starea tuturor furnizorilor</span>
                                 </div>
                             </div>
 
@@ -385,7 +385,7 @@ for chunk in response:
                                 <div class="endpoint-header">
                                     <span class="method post">POST</span>
                                     <code>/api/providers/{name}/toggle</code>
-                                    <span class="endpoint-desc">启用/禁用指定提供商</span>
+                                    <span class="endpoint-desc">Activează/dezactivează furnizor specific</span>
                                 </div>
                             </div>
 
@@ -393,7 +393,7 @@ for chunk in response:
                                 <div class="endpoint-header">
                                     <span class="method get">GET</span>
                                     <code>/api/stats</code>
-                                    <span class="endpoint-desc">获取总体统计数据</span>
+                                    <span class="endpoint-desc">Obține statistici generale</span>
                                 </div>
                             </div>
                         </div>
@@ -404,7 +404,7 @@ for chunk in response:
         </main>
     </div>
 
-    <!-- Toast 通知 -->
+    <!-- Notificări Toast -->
     <div class="toast-container" id="toastContainer"></div>
 
     <script src="/static/js/app.js"></script>

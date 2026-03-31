@@ -1,36 +1,36 @@
 /**
- * FreeAPI Pool - 前端交互逻辑
- * 免费API流量池管理界面
+ * FreeAPI Pool - Logică interacțiune frontend
+ * Interfață de gestionare piscină API gratuită
  */
 
 const API_BASE = window.location.origin;
 
-// ============ 页面切换 ============
+// ============ Schimbare pagină ============
 
 function switchPage(page) {
-    // 移动端：切换页面时关闭侧边栏
+    // Dispozitive mobile: închide sidebar la schimbarea paginii
     closeSidebar();
 
-    // 更新导航高亮
+    // Actualizează evidențierea navigării
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
     document.querySelector(`.nav-item[data-page="${page}"]`)?.classList.add('active');
 
-    // 切换页面
+    // Schimbă pagina
     document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
     document.getElementById(`page-${page}`)?.classList.add('active');
 
-    // 更新标题
+    // Actualizează titlu
     const titles = {
-        dashboard: '控制面板',
-        providers: '提供商管理',
-        models: '模型列表',
-        playground: '对话测试',
-        apikeys: 'API密钥',
-        docs: '接口文档',
+        dashboard: 'Panou de control',
+        providers: 'Gestionare furnizori',
+        models: 'Listă modele',
+        playground: 'Testare conversație',
+        apikeys: 'Chei API',
+        docs: 'Documentație API',
     };
     document.getElementById('pageTitle').textContent = titles[page] || page;
 
-    // 加载页面数据
+    // Încarcă datele paginii
     if (page === 'dashboard') refreshDashboard();
     if (page === 'providers') loadProviders();
     if (page === 'models') loadModels();
@@ -49,7 +49,7 @@ function closeSidebar() {
     document.getElementById('sidebarOverlay').classList.remove('active');
 }
 
-// ============ 控制面板 ============
+// ============ Panou de control ============
 
 async function refreshDashboard() {
     try {
@@ -61,34 +61,34 @@ async function refreshDashboard() {
         const stats = await statsRes.json();
         const providersData = await providersRes.json();
 
-        // 更新统计数字
+        // Actualizează statistici
         document.getElementById('stat-requests').textContent = stats.total_requests.toLocaleString();
         document.getElementById('stat-success').textContent = stats.success_rate;
         document.getElementById('stat-models').textContent = stats.total_models;
         document.getElementById('stat-providers').textContent = `${stats.active_providers}/${stats.total_providers}`;
 
-        // 渲染提供商概览卡片
+        // Randare carduri furnizori
         const overview = document.getElementById('providerOverview');
         overview.innerHTML = providersData.providers.map(p => `
             <div class="provider-card">
                 <div class="provider-card-header">
                     <span class="provider-card-name">${p.label || p.name}</span>
-                    <span class="badge ${p.working ? 'badge-success' : 'badge-error'}">${p.working ? '运行中' : '已停止'}</span>
+                    <span class="badge ${p.working ? 'badge-success' : 'badge-error'}">${p.working ? 'Activ' : 'Oprit'}</span>
                 </div>
                 <div class="provider-card-stats">
-                    <span>模型: ${p.models?.length || 0}</span>
-                    <span>请求: ${p.stats?.total_requests || 0}</span>
-                    <span>成功率: ${p.stats?.success_rate || '0.0%'}</span>
+                    <span>Modele: ${p.models?.length || 0}</span>
+                    <span>Cereri: ${p.stats?.total_requests || 0}</span>
+                    <span>Succes: ${p.stats?.success_rate || '0.0%'}</span>
                 </div>
             </div>
         `).join('');
 
     } catch (e) {
-        console.error('刷新控制面板失败:', e);
+        console.error('Eroare la reîmprospătarea panoului:', e);
     }
 }
 
-// ============ 提供商管理 ============
+// ============ Gestionare furnizori ============
 
 async function loadProviders() {
     try {
@@ -105,23 +105,23 @@ async function loadProviders() {
                     </div>
                     <div style="font-size:11px;color:var(--text-muted);">${p.label || ''}</div>
                 </td>
-                <td><span class="badge ${p.working ? 'badge-success' : 'badge-error'}">${p.working ? '运行中' : '已停止'}</span></td>
+                <td><span class="badge ${p.working ? 'badge-success' : 'badge-error'}">${p.working ? 'Activ' : 'Oprit'}</span></td>
                 <td>${p.models?.length || 0}</td>
                 <td>${p.stats?.total_requests || 0}</td>
                 <td>${p.stats?.success_rate || '0.0%'}</td>
                 <td>${p.stats?.avg_latency_ms || '0'}ms</td>
-                <td>${p.needs_auth ? '<span class="badge badge-warning">需要</span>' : '<span class="badge badge-info">免费</span>'}</td>
+                <td>${p.needs_auth ? '<span class="badge badge-warning">Da</span>' : '<span class="badge badge-info">Gratuit</span>'}</td>
                 <td>
                     <div style="display:flex;gap:6px;">
-                        <button class="btn btn-sm" onclick="toggleProvider('${p.name}')">${p.working ? '禁用' : '启用'}</button>
-                        <button class="btn btn-sm" onclick="checkHealth('${p.name}')">检测</button>
+                        <button class="btn btn-sm" onclick="toggleProvider('${p.name}')">${p.working ? 'Dezactivează' : 'Activează'}</button>
+                        <button class="btn btn-sm" onclick="checkHealth('${p.name}')">Verifică</button>
                     </div>
                 </td>
             </tr>
         `).join('');
 
     } catch (e) {
-        console.error('加载提供商失败:', e);
+        console.error('Eroare la încărcarea furnizorilor:', e);
     }
 }
 
@@ -132,27 +132,27 @@ async function toggleProvider(name) {
         showToast(data.message, 'success');
         loadProviders();
     } catch (e) {
-        showToast('操作失败: ' + e.message, 'error');
+        showToast('Eroare operație: ' + e.message, 'error');
     }
 }
 
 async function checkHealth(name) {
-    showToast(`正在检测 ${name}...`, 'info');
+    showToast(`Se verifică ${name}...`, 'info');
     try {
         const res = await fetch(`${API_BASE}/api/providers/${name}/health`, { method: 'POST' });
         const data = await res.json();
         showToast(
-            `${name}: ${data.healthy ? '✓ 服务正常' : '✗ 服务异常'}`,
+            `${name}: ${data.healthy ? '✓ Serviciu funcțional' : '✗ Serviciu defect'}`,
             data.healthy ? 'success' : 'error'
         );
         loadProviders();
     } catch (e) {
-        showToast(`检测失败: ${e.message}`, 'error');
+        showToast(`Verificare eșuată: ${e.message}`, 'error');
     }
 }
 
 async function checkAllHealth() {
-    showToast('正在检测所有提供商...', 'info');
+    showToast('Se verifică toți furnizorii...', 'info');
     try {
         const res = await fetch(`${API_BASE}/api/providers`);
         const data = await res.json();
@@ -160,11 +160,11 @@ async function checkAllHealth() {
             await checkHealth(p.name);
         }
     } catch (e) {
-        showToast('检测失败', 'error');
+        showToast('Verificare eșuată', 'error');
     }
 }
 
-// ============ 模型列表 ============
+// ============ Listă modele ============
 
 let allModels = [];
 
@@ -175,7 +175,7 @@ async function loadModels() {
         allModels = data.models || [];
         renderModels(allModels);
     } catch (e) {
-        console.error('加载模型失败:', e);
+        console.error('Eroare la încărcarea modelelor:', e);
     }
 }
 
@@ -193,11 +193,11 @@ function filterModels(category) {
 function renderModels(models) {
     const grid = document.getElementById('modelsGrid');
     if (models.length === 0) {
-        grid.innerHTML = '<div class="loading">暂无模型</div>';
+        grid.innerHTML = '<div class="loading">Niciun model disponibil</div>';
         return;
     }
 
-    const catLabels = { chat: '对话', code: '代码', reasoning: '推理', vision: '视觉', image: '图像', audio: '音频' };
+    const catLabels = { chat: 'Conversație', code: 'Cod', reasoning: 'Raționament', vision: 'Vizual', image: 'Imagini', audio: 'Audio' };
     const catClasses = { chat: 'cat-chat', code: 'cat-code', reasoning: 'cat-reasoning', vision: 'cat-vision', image: 'cat-image', audio: 'cat-audio' };
 
     grid.innerHTML = models.map(m => `
@@ -216,7 +216,7 @@ function renderModels(models) {
     `).join('');
 }
 
-// ============ 对话测试 ============
+// ============ Testare conversație ============
 
 let chatHistory = [];
 let isStreaming = false;
@@ -231,21 +231,21 @@ async function loadPlaygroundOptions() {
         const modelsData = await modelsRes.json();
         const providersData = await providersRes.json();
 
-        // 填充模型下拉
+        // Completează dropdown modele
         const modelSelect = document.getElementById('playgroundModel');
         modelSelect.innerHTML = (modelsData.models || []).map(m =>
             `<option value="${m.id}">${m.label} (${m.id})</option>`
         ).join('');
 
-        // 填充提供商下拉
+        // Completează dropdown furnizori
         const providerSelect = document.getElementById('playgroundProvider');
-        providerSelect.innerHTML = '<option value="">自动选择</option>' +
+        providerSelect.innerHTML = '<option value="">Selectare automată</option>' +
             (providersData.providers || []).filter(p => p.working).map(p =>
                 `<option value="${p.name}">${p.label || p.name}</option>`
             ).join('');
 
     } catch (e) {
-        console.error('加载对话选项失败:', e);
+        console.error('Eroare la încărcarea opțiunilor conversației:', e);
     }
 }
 
@@ -264,11 +264,11 @@ async function sendMessage() {
     input.value = '';
     autoResizeTextarea(input);
 
-    // 移除欢迎页
+    // Elimină pagina de bun venit
     const welcome = document.querySelector('.chat-welcome');
     if (welcome) welcome.remove();
 
-    // 添加用户消息
+    // Adaugă mesaj utilizator
     appendMessage('user', message);
 
     chatHistory.push({ role: 'user', content: message });
@@ -281,7 +281,7 @@ async function sendMessage() {
     isStreaming = true;
     document.getElementById('sendBtn').disabled = true;
 
-    // 创建 AI 回复气泡
+    // Creează bule răspuns AI
     const assistantBubble = appendMessage('assistant', '');
     const bubbleContent = assistantBubble.querySelector('.chat-bubble');
 
@@ -327,7 +327,7 @@ async function sendMessage() {
             if (assistantContent) {
                 chatHistory.push({ role: 'assistant', content: assistantContent });
             } else {
-                bubbleContent.textContent = '未收到有效回复，请稍后重试或切换其他模型。';
+                bubbleContent.textContent = 'Nu s-a primit răspuns valid, încearcă mai târziu sau schimbă modelul.';
                 bubbleContent.style.color = 'var(--accent-orange)';
             }
 
@@ -346,17 +346,17 @@ async function sendMessage() {
 
             const data = await res.json();
             if (data.error) {
-                const errMsg = data.content || data.error?.message || '提供商暂时不可用，请重试。';
+                const errMsg = data.content || data.error?.message || 'Furnizorul nu este disponibil momentan, încearcă din nou.';
                 bubbleContent.textContent = errMsg;
                 bubbleContent.style.color = 'var(--accent-orange)';
             } else {
-                const content = data.content || data.choices?.[0]?.message?.content || '(无回复)';
+                const content = data.content || data.choices?.[0]?.message?.content || '(fără răspuns)';
                 bubbleContent.textContent = content;
                 chatHistory.push({ role: 'assistant', content });
             }
         }
     } catch (e) {
-        bubbleContent.textContent = `错误: ${e.message}`;
+        bubbleContent.textContent = `Eroare: ${e.message}`;
         bubbleContent.style.color = 'var(--accent-red)';
     }
 
@@ -385,8 +385,8 @@ function clearChat() {
             <div class="welcome-icon">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
-            <h3>对话测试</h3>
-            <p>选择模型并开始对话，测试API流量池的响应效果</p>
+            <h3>Testare conversație</h3>
+            <p>Selectează un model și începe o conversație pentru a testa răspunsurile piscinei API</p>
         </div>
     `;
 }
@@ -401,24 +401,24 @@ function autoResizeTextarea(el) {
     el.style.height = Math.min(el.scrollHeight, 120) + 'px';
 }
 
-// ============ API密钥 ============
+// ============ Chei API ============
 
 let apiKeys = [];
 
 function generateApiKey() {
     const key = 'fp-' + Array.from(crypto.getRandomValues(new Uint8Array(24)), b => b.toString(16).padStart(2, '0')).join('');
-    const name = `密钥-${apiKeys.length + 1}`;
-    const now = new Date().toLocaleString('zh-CN');
+    const name = `Cheie-${apiKeys.length + 1}`;
+    const now = new Date().toLocaleString('ro-RO');
 
     apiKeys.push({ name, key, created: now, usage: 0, active: true });
     renderApiKeys();
-    showToast('API密钥已生成', 'success');
+    showToast('Cheia API a fost generată', 'success');
 }
 
 function renderApiKeys() {
     const tbody = document.getElementById('apiKeysTableBody');
     if (apiKeys.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="empty-state"><p>暂无API密钥。当前为开放访问模式。</p></td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="empty-state"><p>Nicio cheie API. Modul curent este acces deschis.</p></td></tr>`;
         return;
     }
 
@@ -427,14 +427,14 @@ function renderApiKeys() {
             <td>${k.name}</td>
             <td>
                 <code style="font-size:12px;color:var(--text-accent);font-family:'JetBrains Mono',monospace;">${k.key.slice(0, 12)}...${k.key.slice(-6)}</code>
-                <button class="btn-icon" onclick="copyText('${k.key}')" title="复制">复制</button>
+                <button class="btn-icon" onclick="copyText('${k.key}')" title="Copiază">Copiază</button>
             </td>
             <td>${k.created}</td>
             <td>${k.usage}</td>
-            <td><span class="badge ${k.active ? 'badge-success' : 'badge-error'}">${k.active ? '活跃' : '已禁用'}</span></td>
+            <td><span class="badge ${k.active ? 'badge-success' : 'badge-error'}">${k.active ? 'Activă' : 'Dezactivată'}</span></td>
             <td>
-                <button class="btn btn-sm" onclick="toggleApiKey(${i})">${k.active ? '禁用' : '启用'}</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteApiKey(${i})">删除</button>
+                <button class="btn btn-sm" onclick="toggleApiKey(${i})">${k.active ? 'Dezactivează' : 'Activează'}</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteApiKey(${i})">Șterge</button>
             </td>
         </tr>
     `).join('');
@@ -448,20 +448,20 @@ function toggleApiKey(index) {
 function deleteApiKey(index) {
     apiKeys.splice(index, 1);
     renderApiKeys();
-    showToast('密钥已删除', 'info');
+    showToast('Cheia a fost ștearsă', 'info');
 }
 
-// ============ 工具函数 ============
+// ============ Funcții utilitare ============
 
 function copyEndpoint() {
     copyText(`${window.location.origin}/v1`);
-    showToast('API地址已复制', 'success');
+    showToast('Adresa API a fost copiată', 'success');
 }
 
 function copyCode(id) {
     const el = document.getElementById(id);
     copyText(el.textContent);
-    showToast('代码已复制', 'success');
+    showToast('Codul a fost copiat', 'success');
 }
 
 function copyText(text) {
@@ -490,18 +490,18 @@ function showToast(message, type = 'info') {
     setTimeout(() => toast.remove(), 3000);
 }
 
-// ============ 初始化 ============
+// ============ Inițializare ============
 
 document.addEventListener('DOMContentLoaded', () => {
     refreshDashboard();
 
-    // textarea 自动高度
+    // textarea ajustare automată înălțime
     const chatInput = document.getElementById('chatInput');
     chatInput?.addEventListener('input', function() {
         autoResizeTextarea(this);
     });
 
-    // 每30秒自动刷新统计
+    // Reîmprospătează statistici automat la fiecare 30 secunde
     setInterval(() => {
         const activePage = document.querySelector('.page.active')?.id;
         if (activePage === 'page-dashboard') refreshDashboard();
